@@ -3,8 +3,8 @@
 # Contributor: netroy
 
 pkgname=arduino-ide-bin
-pkgver=2.3.2
-pkgrel=2
+pkgver=2.3.3
+pkgrel=1
 pkgdesc="Arduino prototyping platform IDE, rewrite based on the Theia IDE framework."
 arch=(x86_64)
 url="https://github.com/arduino/arduino-ide"
@@ -21,7 +21,7 @@ options=(!strip)
 source=("https://github.com/arduino/arduino-ide/releases/download/${pkgver}/arduino-ide_${pkgver}_Linux_64bit.zip"
         "https://www.arduino.cc/wiki/370832ed4114dd35d498f2f449b4781e/arduino.svg"
         "${pkgname}.sh")
-sha256sums=('1a23b911043a247116ace846f03a0265c719dcd49cf9a8af09334db4d3916e88'
+sha256sums=('400315a3020f5dcc1dd979fba182f9867f2379de00cc99b098b8eb06dce0eaba'
             '4137981bcb4057c2e0092f22faea287767f102e0b48497d22cd55e8d6988e4ac'
             'c02f0c40b92e50f46b09339d1ccfb0cb7cd7caa1e5d386ee9b85938810bfda34')
 
