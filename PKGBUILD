@@ -4,7 +4,7 @@
 
 pkgname=arduino-ide-bin
 pkgver=2.3.4
-pkgrel=1
+pkgrel=2
 pkgdesc="Arduino prototyping platform IDE, rewrite based on the Theia IDE framework."
 arch=(x86_64)
 url="https://github.com/arduino/arduino-ide"
@@ -14,6 +14,7 @@ optdepends=('libusb: Needed for some libraries or boards'
             'usbutils: Needed for stm32 boards using st-link'
             'libusb-compat: Needed for the `micronucleus` cli utility'
             'python-pyserial: Needed for esptool')
+makedepends=(unzip)
 provides=(arduino-ide)
 conflicts=(arduino-ide)
 replaces=(arduino-ide-beta-bin)
