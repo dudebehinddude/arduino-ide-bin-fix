@@ -3,7 +3,7 @@
 # Contributor: netroy
 
 pkgname=arduino-ide-bin
-pkgver=2.3.3
+pkgver=2.3.4
 pkgrel=1
 pkgdesc="Arduino prototyping platform IDE, rewrite based on the Theia IDE framework."
 arch=(x86_64)
@@ -21,21 +21,24 @@ options=(!strip)
 source=("https://github.com/arduino/arduino-ide/releases/download/${pkgver}/arduino-ide_${pkgver}_Linux_64bit.zip"
         "https://www.arduino.cc/wiki/370832ed4114dd35d498f2f449b4781e/arduino.svg"
         "${pkgname}.sh")
-sha256sums=('400315a3020f5dcc1dd979fba182f9867f2379de00cc99b098b8eb06dce0eaba'
+sha256sums=('424aacc25e1558851083be651ac92195443f69c9a7d65710b447a40967a4b381'
             '4137981bcb4057c2e0092f22faea287767f102e0b48497d22cd55e8d6988e4ac'
             'c02f0c40b92e50f46b09339d1ccfb0cb7cd7caa1e5d386ee9b85938810bfda34')
-
+noextract=(arduino-ide_${pkgver}_Linux_64bit.zip)
+            
 prepare() {
 	echo -e "[Desktop Entry]\nType=Application\nName=Arduino IDE v2\nGenericName=Arduino IDE v2\nComment=Open-source electronics prototyping platform\nExec=arduino-ide %U\nIcon=arduino-ide-v2\nTerminal=false\nMimeType=text/x-arduino;\nCategories=Development;IDE;Electronics;\nKeywords=embedded electronics;avr;microcontroller;\nStartupWMClass=Arduino IDE" > arduino-ide-v2.desktop
+	
+	mkdir -p "$srcdir/arduino-ide"
+	unzip "$srcdir/arduino-ide_${pkgver}_Linux_64bit.zip" -d "$srcdir/arduino-ide"
 }
 
 package() {
 	install -dm755 "$pkgdir/opt/"
-	mv "arduino-ide_${pkgver}_Linux_64bit" "arduino-ide"
 	chmod -R 755 "arduino-ide"
-	cp -r "arduino-ide" "$pkgdir/opt/arduino-ide"
+	cp -r "$srcdir/arduino-ide" "$pkgdir/opt/arduino-ide"
 	install -dm755 "$pkgdir/usr/bin"
-	install -Dm644 "arduino-ide-v2.desktop" "$pkgdir/usr/share/applications/arduino-ide-v2.desktop"
-	install -Dm644 "arduino.svg" "$pkgdir/usr/share/pixmaps/arduino-ide-v2.svg"
+	install -Dm644 "$srcdir/arduino-ide-v2.desktop" "$pkgdir/usr/share/applications/arduino-ide-v2.desktop"
+	install -Dm644 "$srcdir/arduino.svg" "$pkgdir/usr/share/pixmaps/arduino-ide-v2.svg"
 	install -m755 "${srcdir}/${pkgname}.sh" "$pkgdir/usr/bin/arduino-ide"
 }
