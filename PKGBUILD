@@ -3,8 +3,8 @@
 # Contributor: netroy
 
 pkgname=arduino-ide-bin
-pkgver=2.3.4
-pkgrel=2
+pkgver=2.3.5
+pkgrel=1
 pkgdesc="Arduino prototyping platform IDE, rewrite based on the Theia IDE framework."
 arch=(x86_64)
 url="https://github.com/arduino/arduino-ide"
@@ -22,7 +22,7 @@ options=(!strip)
 source=("https://github.com/arduino/arduino-ide/releases/download/${pkgver}/arduino-ide_${pkgver}_Linux_64bit.zip"
         "https://www.arduino.cc/wiki/370832ed4114dd35d498f2f449b4781e/arduino.svg"
         "${pkgname}.sh")
-sha256sums=('424aacc25e1558851083be651ac92195443f69c9a7d65710b447a40967a4b381'
+sha256sums=('5d1121f3faa8915896de559b79026b92266b360dbc327503425a592028991a42'
             '4137981bcb4057c2e0092f22faea287767f102e0b48497d22cd55e8d6988e4ac'
             'c02f0c40b92e50f46b09339d1ccfb0cb7cd7caa1e5d386ee9b85938810bfda34')
 noextract=(arduino-ide_${pkgver}_Linux_64bit.zip)
@@ -37,7 +37,7 @@ prepare() {
 package() {
 	install -dm755 "$pkgdir/opt/"
 	chmod -R 755 "arduino-ide"
-	cp -r "$srcdir/arduino-ide" "$pkgdir/opt/arduino-ide"
+	cp -r "$srcdir/arduino-ide/arduino-ide_${pkgver}_Linux_64bit/" "$pkgdir/opt/arduino-ide"
 	install -dm755 "$pkgdir/usr/bin"
 	install -Dm644 "$srcdir/arduino-ide-v2.desktop" "$pkgdir/usr/share/applications/arduino-ide-v2.desktop"
 	install -Dm644 "$srcdir/arduino.svg" "$pkgdir/usr/share/pixmaps/arduino-ide-v2.svg"
