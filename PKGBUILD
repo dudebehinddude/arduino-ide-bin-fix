@@ -20,10 +20,10 @@ conflicts=(arduino-ide)
 replaces=(arduino-ide-beta-bin)
 options=(!strip)
 source=("https://github.com/arduino/arduino-ide/releases/download/${pkgver}/arduino-ide_${pkgver}_Linux_64bit.zip"
-        "https://www.arduino.cc/wiki/370832ed4114dd35d498f2f449b4781e/arduino.svg"
+        "https://www.arduino.cc/wiki/static/arduino-app-76bd27c4ce7246825aceb8efe2871f7a.svg"
         "${pkgname}.sh")
 sha256sums=('33bf2cb868abf92b3d160f7433dcd6348cec1c9e633b5c9e1c761f630f87b82b'
-            '4137981bcb4057c2e0092f22faea287767f102e0b48497d22cd55e8d6988e4ac'
+            '071a7680dfd6f227a761cd69a93bd54d8e47bba2c4b002a0c1108e33058bdb36'
             'c02f0c40b92e50f46b09339d1ccfb0cb7cd7caa1e5d386ee9b85938810bfda34')
 noextract=(arduino-ide_${pkgver}_Linux_64bit.zip)
             
@@ -31,7 +31,7 @@ prepare() {
 	echo -e "[Desktop Entry]\nType=Application\nName=Arduino IDE v2\nGenericName=Arduino IDE v2\nComment=Open-source electronics prototyping platform\nExec=arduino-ide %U\nIcon=arduino-ide-v2\nTerminal=false\nMimeType=text/x-arduino;\nCategories=Development;IDE;Electronics;\nKeywords=embedded electronics;avr;microcontroller;\nStartupWMClass=Arduino IDE" > arduino-ide-v2.desktop
 	
 	mkdir -p "$srcdir/arduino-ide"
-	unzip "$srcdir/arduino-ide_${pkgver}_Linux_64bit.zip" -d "$srcdir/arduino-ide"
+	unzip -o "$srcdir/arduino-ide_${pkgver}_Linux_64bit.zip" -d "$srcdir/arduino-ide"
 }
 
 package() {
@@ -40,6 +40,6 @@ package() {
 	cp -r "$srcdir/arduino-ide/arduino-ide_${pkgver}_Linux_64bit/" "$pkgdir/opt/arduino-ide"
 	install -dm755 "$pkgdir/usr/bin"
 	install -Dm644 "$srcdir/arduino-ide-v2.desktop" "$pkgdir/usr/share/applications/arduino-ide-v2.desktop"
-	install -Dm644 "$srcdir/arduino.svg" "$pkgdir/usr/share/pixmaps/arduino-ide-v2.svg"
+  install -Dm644 "$srcdir/arduino-app-76bd27c4ce7246825aceb8efe2871f7a.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/arduino-ide-v2.svg"
 	install -m755 "${srcdir}/${pkgname}.sh" "$pkgdir/usr/bin/arduino-ide"
 }
